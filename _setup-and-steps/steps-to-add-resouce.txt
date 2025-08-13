@@ -141,5 +141,6 @@ Valudate _output/xpkg files and locate *.xpkg file to docker load
 
 6. Deploy and Test:
 docker load -i /home/martinfleming/src/github.com/martinflemingdev/provider-upjet-gcp/_output/xpkg/linux_amd64/provider-gcp-bigquery-v0.0.0-1357.g5381bec1.dirty.xpkg
-docker tag sha256:6636c90cd5a8eab8f3e6a08c049bacf1313b0a1e4dff8936a7b6c17a5b4bd0b3 martinflemingdev/provider-gcp-bigquery:tf-v6.43.0
+docker tag sha256:6636c90cd5a8eab8f3e6a08c049bacf1313b0a1e4dff8936a7b6c17a5b4bd0b3 martinflemingdev/provider-gcp-vertexai-tf-v6.43.0:v1.1.4
 docker push martinflemingdev/provider-gcp-bigquery:tf-v6.43.0
+

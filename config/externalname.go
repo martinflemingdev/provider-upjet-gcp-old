@@ -10,6 +10,14 @@ import (
 	"github.com/upbound/provider-gcp/config/common"
 )
 
+// cliReconciledExternalNameConfigs contains all external name configurations
+// belonging to Terraform resources to be reconciled under the CLI-based
+// architecture for this provider.
+var cliReconciledExternalNameConfigs = map[string]config.ExternalName{
+	// Imported by using the following projects/{{project}}/locations/{{location}}/endpoints/{{name}} roles/aiplatform.viewer user:jane@example.com
+	"google_vertex_ai_endpoint_iam_member": config.IdentifierFromProvider,
+}
+
 // terraformPluginSDKExternalNameConfigs contains all external name configurations
 // belonging to Terraform resources to be reconciled under the no-fork
 // architecture for this provider.
@@ -986,12 +994,12 @@ var terraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"google_vertex_ai_tensorboard": config.TemplatedStringAsIdentifier("display_name", "projects/{{ .setup.configuration.project }}/locations/{{ .parameters.region }}/tensorboards/{{ .external_name }}"),
 	// Imported by using the following projects/{{project}}/locations/{{location}}/endpoints/{{name}}
 	"google_vertex_ai_endpoint": config.TemplatedStringAsIdentifier("name", "projects/{{ .setup.configuration.project }}/locations/{{ .parameters.location }}/endpoints/{{ .external_name }}"),
-	// Imported by using the following projects/{{project}}/locations/{{location}}/endpoints/{{name}} roles/viewer user:jane@example.com
-	"google_vertex_ai_endpoint_iam_member": config.IdentifierFromProvider,
-	// Imported by using the following projects/{{project}}/locations/{{location}}/instances/{{name}}
-	"google_workbench_instance": config.TemplatedStringAsIdentifier("name","projects/{{ .setup.configuration.project }}/locations/{{ .parameters.location }}/instances/{{ .external_name }}"),
-	// Imported by using the following projects/{{project}}/locations/{{location}}/instances/{{name}}
-	"google_workbench_instance_iam_member": config.IdentifierFromProvider,
+	// // Imported by using the following projects/{{project}}/locations/{{location}}/endpoints/{{name}} roles/viewer user:jane@example.com
+	// "google_vertex_ai_endpoint_iam_member": config.IdentifierFromProvider,
+	// // Imported by using the following projects/{{project}}/locations/{{location}}/instances/{{name}}
+	// "google_workbench_instance": config.TemplatedStringAsIdentifier("name","projects/{{ .setup.configuration.project }}/locations/{{ .parameters.location }}/instances/{{ .external_name }}"),
+	// // Imported by using the following projects/{{project}}/locations/{{location}}/instances/{{name}}
+	// "google_workbench_instance_iam_member": config.IdentifierFromProvider,
 
 
 	// documentai
@@ -1075,11 +1083,6 @@ var terraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Imported by using projects/{{project}}/locations/{{location}}/gateways/{{name}}
 	"google_network_services_gateway": config.TemplatedStringAsIdentifier("name", "projects/{{ if .parameters.project }}{{ .parameters.project }}{{ else }}{{ .setup.configuration.project }}{{ end }}/locations/{{ .parameters.location }}/gateways/{{ .external_name }}"),
 }
-
-// cliReconciledExternalNameConfigs contains all external name configurations
-// belonging to Terraform resources to be reconciled under the CLI-based
-// architecture for this provider.
-var cliReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
 // TemplatedStringAsIdentifierWithNoName uses TemplatedStringAsIdentifier but
 // without the name initializer. This allows it to be used in cases where the ID

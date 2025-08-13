@@ -373,7 +373,5 @@
   "google_vertex_ai_featurestore_entitytype",
   "google_vertex_ai_tensorboard",
   "google_vpc_access_connector",
-  "google_workbench_instance",
-  "google_workbench_instance_iam_member",
   "google_workflows_workflow"
 ]

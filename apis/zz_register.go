@@ -147,7 +147,6 @@ import (
 	v1beta2vertexai "github.com/upbound/provider-gcp/apis/vertexai/v1beta2"
 	v1beta1vpcaccess "github.com/upbound/provider-gcp/apis/vpcaccess/v1beta1"
 	v1beta2vpcaccess "github.com/upbound/provider-gcp/apis/vpcaccess/v1beta2"
-	v1beta1workbench "github.com/upbound/provider-gcp/apis/workbench/v1beta1"
 	v1beta1workflows "github.com/upbound/provider-gcp/apis/workflows/v1beta1"
 )
 
@@ -291,7 +290,6 @@ func init() {
 		v1beta2vertexai.SchemeBuilder.AddToScheme,
 		v1beta1vpcaccess.SchemeBuilder.AddToScheme,
 		v1beta2vpcaccess.SchemeBuilder.AddToScheme,
-		v1beta1workbench.SchemeBuilder.AddToScheme,
 		v1beta1workflows.SchemeBuilder.AddToScheme,
 	)
 }

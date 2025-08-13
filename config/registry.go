@@ -10,7 +10,6 @@ import (
 	_ "embed"
 	"strings"
 
-	"github.com/crossplane/upjet/pkg/config"
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/registry/reference"
@@ -138,6 +137,10 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // GetProvider returns provider configuration
 func GetProvider(_ context.Context, generationProvider bool) (*ujconfig.Provider, error) {
 	sdkProvider := provider.Provider()
+	// ------------------------------------------------------------------
+	// Treat Vertex AI Endpoint IAM Member as a **CLI Reconciled** resource
+	// – remove it from the SDK map so it doesn’t appear in two include lists.
+	delete(terraformPluginSDKExternalNameConfigs, "google_vertex_ai_endpoint_iam_member")
 
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
@@ -231,8 +234,8 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 			// with the converted API (with embedded objects in place of
 			// singleton lists), so we need the appropriate Terraform
 			// converter in this case.
-			r.TerraformConversions = []config.TerraformConversion{
-				config.NewTFSingletonConversion(),
+			r.TerraformConversions = []ujconfig.TerraformConversion{
+				ujconfig.NewTFSingletonConversion(),
 			}
 		}
 		pc.Resources[n] = r
@@ -248,7 +251,7 @@ func init() {
 }
 
 // Configure configures the specified Provider.
-type Configure func(provider *config.Provider)
+type Configure func(provider *ujconfig.Provider)
 
 // Configurator is a registry for provider Configs.
 type Configurator []Configure
