@@ -1,0 +1,20 @@
+Makefile
+
+pull-docs: 
+    comment out:
+206     @# workaround for being unable override raw registry data. To be tracked in upjet.
+207 	@mv .work/terraform-provider-google/website/docs/r/network_management_connectivity_test_resource.html.markdown .work/terraform-provider-google/website/docs/r/network_management_connectivity_test.html.markdown
+
+    add as last line:
+    rm -f $(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))/website/docs/r/model_armor_template.html.markdown
+---
+go.mod
+
+go get github.com/crossplane/upjet@v1.9.0   # or latest
+
+we need to replace the import with the correct pseudo-version for v6.43.0 # or latest
+
+v6.43.0 = github.com/hashicorp/terraform-provider-google v1.20.1-0.20250707224822-ef460939a530
+
+---
+install "goimports"
